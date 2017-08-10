@@ -265,7 +265,6 @@ def zhumain_df_h(df_h):
         # 将处理的数据添加到list中
         catil_tomcat_list.insert(0, catil_tomcat_num)
         catil_tomcat_list.insert(1, catil_tomcat_name)
-
         # 截取的log目录
         catil_Log_num = catil_tomcat.rsplit('G', 1)[-1].strip().lstrip().rstrip('/')
         catil_Log_name = catil_Log.rsplit('%', 1)[-1].strip().lstrip()
@@ -278,7 +277,6 @@ def zhumain_df_h(df_h):
 def zhumain_cd_du(cd_du):
     catil_Log_one = ''.join(cd_du[0]).strip().lstrip().rstrip(',')
     catil_Log_two = ''.join(cd_du[1]).strip().lstrip().rstrip(',')
-
     # 1号数据处理流程
     soft_disk_tomcat_one_size = float(catil_Log_one[0:3].rstrip('\t').rstrip('G'))
     if soft_disk_tomcat_one_size >= Disk_alarm_value:
@@ -294,7 +292,6 @@ def zhumain_cd_du(cd_du):
     else:
         whether_return_one = 2
         pass
-
     # 2号数据处理流程
     soft_disk_tomcat_two_size = float(catil_Log_two[0:3].rstrip('\t').rstrip('G'))
     if soft_disk_tomcat_two_size >= Disk_alarm_value:
@@ -319,7 +316,6 @@ def select_port_application(soft_disk_tomcat_port):
     # 进入端口查询项目名称阶段
     projectname = ''
     datalist = server_Data["applicationlist"]
-
     for e in datalist:
         # print soft_disk_tomcat_port
         f = e['portId']
@@ -435,7 +431,6 @@ def inst_excel(server_data_list, server_List_num):
             sheet.write(1, row_name_tx, row_name_t[row_name_t_num], style)
             row_name_tx += 1
             row_name_t_num += 1
-        # sheet.write_merge(5, 5, 0, 10)
         try:
             # 为样式创建字体
             style = xlwt.XFStyle()
@@ -488,6 +483,4 @@ def inst_excel(server_data_list, server_List_num):
                     return file_te
         except UnboundLocalError:
             print u'局部变量的引用赋值前<文件>'
-
-
 main()
