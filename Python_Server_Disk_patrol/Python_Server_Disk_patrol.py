@@ -17,47 +17,181 @@ catil_Log_list = []
 soft_disk_tomcat_one_list = []
 soft_disk_tomcat_two_list = []
 excel_data_list = []
-whether_return_state_list = []
 
 # 当前时间格式
-Disk_alarm_value = 2.0
+Disk_alarm_value = 3.0
 ISOTIMEFORMAT_SHEET = '%Y%m%d'
 ISOTIMEFORMAT = '%Y-%m-%d %H:%M'
 ISOTIMEFORMAT_t = '%m%d-'
 ISOTIMEFORMAT_m = '%H:%M'
 now_time = time.strftime(ISOTIMEFORMAT, time.localtime())
-
 return_state = 1
+# server_Data = {
+#     "Serverlist": [
+#         {
+#             "Serverip": "192.168.133.133",
+#             "Serveruser": "root",
+#             "Serverpwd": "12345678",
+#             "excel_num": 3,
+#             "Server_environment": "测试"
+#         },
+#         {
+#             "Serverip": "192.168.133.147",
+#             "Serveruser": "root",
+#             "Serverpwd": "171800",
+#             "excel_num": 5,
+#             "Server_environment": "生产"
+#         },
+#         {
+#             "Serverip": "192.168.133.134",
+#             "Serveruser": "root",
+#             "Serverpwd": "12345678",
+#             "excel_num": 4,
+#             "Server_environment": "测试"
+#         },
+#         {
+#             "Serverip": "192.168.133.135",
+#             "Serveruser": "root",
+#             "Serverpwd": "12345678",
+#             "excel_num": 6,
+#             "Server_environment": "生产"
+#         },
+#     ],
+#     "applicationlist": [
+#         {
+#             "portId": 8114,
+#             "projectName": "联通"
+#         },
+#         {
+#             "portId": 8099,
+#             "projectName": "宝安"
+#         },
+#         {
+#             "portId": 8081,
+#             "projectName": "SAP推送"
+#         },
+#         {
+#             "portId": 8092,
+#             "projectName": "VP下发"
+#         },
+#         {
+#             "portId": 8084,
+#             "projectName": "直送单下发"
+#         },
+#         {
+#             "portId": 8090,
+#             "projectName": "SAP回传"
+#         },
+#         {
+#             "portId": 8091,
+#             "projectName": "CPWEB"
+#         },
+#         {
+#             "portId": 8070,
+#             "projectName": "辉瑞"
+#         },
+#         {
+#             "portId": 8122,
+#             "projectName": "用友"
+#         },
+#         {
+#             "portId": 8115,
+#             "projectName": "红星美凯龙"
+#         },
+#         {
+#             "portId": 8080,
+#             "projectName": "铁塔"
+#         },
+#         {
+#             "portId": 8020,
+#             "projectName": "阿里巴巴"
+#         },
+#         {
+#             "portId": 8041,
+#             "projectName": "河南政采"
+#         },
+#         {
+#             "portId": 8095,
+#             "projectName": "华为"
+#         },
+#         {
+#             "portId": 8045,
+#             "projectName": "工商银行"
+#         }
+#     ]
+# }
 server_Data = {
     "Serverlist": [
         {
-            "Serverip": "192.168.133.133",
+            "Serverip": "10.78.1.163",
             "Serveruser": "root",
-            "Serverpwd": "12345678",
+            "Serverpwd": "Staples_dev",
             "excel_num": 3,
             "Server_environment": "测试"
         },
         {
-            "Serverip": "192.168.133.147",
+            "Serverip": "10.78.1.164",
             "Serveruser": "root",
-            "Serverpwd": "171800",
+            "Serverpwd": "Staples_app",
+            "excel_num": 4,
+            "Server_environment": "生产"
+        },
+        {
+            "Serverip": "10.78.1.183",
+            "Serveruser": "root",
+            "Serverpwd": "Staples_ser",
             "excel_num": 5,
             "Server_environment": "生产"
         },
         {
-            "Serverip": "192.168.133.134",
+            "Serverip": "10.10.2.155",
             "Serveruser": "root",
-            "Serverpwd": "12345678",
-            "excel_num": 4,
-            "Server_environment": "测试"
-        },
-        {
-            "Serverip": "192.168.133.135",
-            "Serveruser": "root",
-            "Serverpwd": "12345678",
+            "Serverpwd": "Staples_1",
             "excel_num": 6,
             "Server_environment": "生产"
         },
+        {
+            "Serverip": "10.78.1.194",
+            "Serveruser": "root",
+            "Serverpwd": "Staples_1",
+            "excel_num": 7,
+            "Server_environment": "生产"
+        },
+        {
+            "Serverip": "10.78.3.202",
+            "Serveruser": "root",
+            "Serverpwd": "Staples_yd",
+            "excel_num": 8,
+            "Server_environment": "生产"
+        },
+        {
+            "Serverip": "172.19.120.219",
+            "Serveruser": "root",
+            "Serverpwd": "Staples_yd",
+            "excel_num": 9,
+            "Server_environment": "生产"
+        },
+        {
+            "Serverip": "172.19.120.218",
+            "Serveruser": "root",
+            "Serverpwd": "Staples_yd",
+            "excel_num": 10,
+            "Server_environment": "生产"
+        },
+        {
+            "Serverip": "172.19.120.220",
+            "Serveruser": "root",
+            "Serverpwd": "Staples_yd",
+            "excel_num": 11,
+            "Server_environment": "生产"
+        },
+        {
+            "Serverip": "172.19.120.221",
+            "Serveruser": "root",
+            "Serverpwd": "Staples_yd",
+            "excel_num": 12,
+            "Server_environment": "生产"
+        }
     ],
     "applicationlist": [
         {
@@ -119,9 +253,14 @@ server_Data = {
         {
             "portId": 8045,
             "projectName": "工商银行"
+        },
+{
+            "portId": 8025,
+            "projectName": "国网"
         }
     ]
 }
+
 server_list = server_Data['Serverlist']
 
 def heng():
@@ -148,94 +287,104 @@ def pingServer(server):
 
 def main():
     start = time.clock()
+    time.sleep(0.2)
+    print u'服务器巡查程序启动'
     server_List_num = 0
-    a = 0
     server_data_list = []
+    time.sleep(0.5)
     heng()
-    print time.strftime('%Y-%m-%d %H:%M:%S')
+    time.sleep(0.2)
+    print u'当前时间：', time.strftime('%Y-%m-%d %H:%M:%S')
+    time.sleep(0.3)
     for server_List in server_list:
-        Serverip = server_List['Serverip']
+        # Serverip = server_List['Serverip']
         serverOneIp = server_List['Serverip']
         serverOneuser = server_List['Serveruser']
         serverOnepwd = server_List['Serverpwd']
-
         # 返回未处理list数据
-        # df_h, cd_du = command_returns(serverOneIp, serverOneuser, serverOnepwd)
-        if a == 0:
-            df_h = [
-                u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-                u'/dev/mapper/centos_yanyi-root   46G   10G   34G   20% /\n',
-                u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-                u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-                u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-                u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-                u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            cd_du = [u'4.5G\tapache-tomcat-8084\n', u'3G\tapache-tomcat-8028\n', u'5.2G\tapache-tomcat-8092\n',
-                     u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            a += 1
-        elif a == 1:
-            df_h = [
-                u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-                u'/dev/mapper/centos_yanyi-root   46G   23G   23G   50% /\n',
-                u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-                u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-                u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-                u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-                u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            cd_du = [u'5.5G\tapache-tomcat-8055\n', u'5.4G\tapache-tomcat-8114\n', u'5.2G\tapache-tomcat-8091\n',
-                     u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            a += 1
-        elif a == 2:
-            df_h = [
-                u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-                u'/dev/mapper/centos_yanyi-root   46G   34G   13G   80% /\n',
-                u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-                u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-                u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-                u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-                u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            cd_du = [u'10G\tapache-tomcat-8182\n', u'7.4G\tapache-tomcat-8092\n', u'5.2G\tapache-tomcat-8091\n',
-                     u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            a += 1
-        elif a == 3:
-            df_h = [
-                u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-                u'/dev/mapper/centos_yanyi-root   46G   34G   5G   95% /\n',
-                u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-                u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-                u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-                u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-                u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-                u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            cd_du = [u'15G\tapache-tomcat-8090\n', u'9G\tapache-tomcat-8080\n', u'5.2G\tapache-tomcat-8091\n',
-                     u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            a += 1
+        try:
+            df_h, cd_du = command_returns(serverOneIp, serverOneuser, serverOnepwd)
+            # if a == 0:
+            #     df_h = [
+            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
+            #         u'/dev/mapper/centos_yanyi-root   46G   10G   34G   20% /\n',
+            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
+            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
+            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
+            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
+            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
+            #     cd_du = [u'4.5G\tapache-tomcat-8084\n', u'3G\tapache-tomcat-8028\n', u'5.2G\tapache-tomcat-8092\n',
+            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
+            #     a += 1
+            # elif a == 1:
+            #     df_h = [
+            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
+            #         u'/dev/mapper/centos_yanyi-root   46G   23G   23G   50% /\n',
+            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
+            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
+            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
+            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
+            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
+            #     cd_du = [u'5.5G\tapache-tomcat-8055\n', u'5.4G\tapache-tomcat-8114\n', u'5.2G\tapache-tomcat-8091\n',
+            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
+            #     a += 1
+            # elif a == 2:
+            #     df_h = [
+            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
+            #         u'/dev/mapper/centos_yanyi-root   46G   34G   13G   80% /\n',
+            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
+            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
+            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
+            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
+            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
+            #     cd_du = [u'10G\tapache-tomcat-8182\n', u'7.4G\tapache-tomcat-8092\n', u'5.2G\tapache-tomcat-8091\n',
+            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
+            #     a += 1
+            # elif a == 3:
+            #     df_h = [
+            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
+            #         u'/dev/mapper/centos_yanyi-root   46G   34G   5G   95% /\n',
+            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
+            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
+            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
+            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
+            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
+            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
+            #     cd_du = [u'15G\tapache-tomcat-8090\n', u'9G\tapache-tomcat-8080\n', u'5.2G\tapache-tomcat-8091\n',
+            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
+            #     a += 1
 
-        # 返回已处理list数据
-        time.sleep(1)
-        catil_tomcat_list, catil_Log_list = zhumain_df_h(df_h)
-        soft_disk_tomcat_one_list, soft_disk_tomcat_two_list, whether_return_state_list = zhumain_cd_du(cd_du)
-        time.sleep(1)
-        server_List_num += 1
-        server_list_data = data_excel(catil_tomcat_list, soft_disk_tomcat_one_list, soft_disk_tomcat_two_list, serverOneIp)
-        if server_list_data is None:
+            # 返回已处理list数据
+            time.sleep(1)
+            catil_tomcat_list, catil_Log_list = zhumain_df_h(df_h)
+            soft_disk_tomcat_one_list, soft_disk_tomcat_two_list = zhumain_cd_du(cd_du)
+            server_List_num += 1
+            server_list_data = data_excel(catil_tomcat_list, soft_disk_tomcat_one_list, soft_disk_tomcat_two_list, serverOneIp)
+            if server_list_data is None:
+                pass
+            else:
+                server_data_list.append(server_list_data)
+        except BaseException:
+            print u'巡查服务器：%s 异常！'% (serverOneIp)
             pass
-        else:
-            server_data_list.append(server_list_data)
     time.sleep(1)
     file_te = inst_excel(server_data_list, server_List_num)
     time.sleep(1)
     print '文件保存地址：', file_te
     print ''
     end = time.clock()
-    print u'完成！'
+    time.sleep(1)
+    print u'服务器巡查程序终止！'
+    print u'服务器巡查完成！'
+    print ''
+    time.sleep(0.2)
     print u'脚本运行时间：%s s' % (end - start)
     print u'完成时间：', now_time
 # 命令结果返回函数
@@ -244,6 +393,8 @@ def command_returns(serverOneIp, serverOneuser, serverOnepwd):
         ps.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ps.connect(hostname=serverOneIp, port=22, username=serverOneuser, password=serverOnepwd)
         commlistDf = ['df -h']
+        time.sleep(2)
+        print u'巡查服务器编号：%s 登录正常'% (serverOneIp)
         for comm in commlistDf:
             stdin, stdout, stderr = ps.exec_command(comm)
             df_h = stdout.readlines()
@@ -258,7 +409,7 @@ def command_returns(serverOneIp, serverOneuser, serverOnepwd):
 def zhumain_df_h(df_h):
         # 处理原始数据为使用数据
         catil_tomcat = ''.join(df_h[1]).strip().lstrip().rstrip()
-        catil_Log = ''.join(df_h[4]).strip().lstrip().rstrip()
+        catil_Log = '' #.join(df_h[4]).strip().lstrip().rstrip()
         # 截取根目录
         catil_tomcat_num = catil_tomcat.rsplit('G', 1)[-1].strip().lstrip().replace(' ', '').rstrip('% /')
         catil_tomcat_name = catil_tomcat.rsplit('%', 1)[-1].strip().lstrip().rstrip()
@@ -288,10 +439,10 @@ def zhumain_cd_du(cd_du):
         soft_disk_tomcat_one_list.insert(0, soft_disk_tomcat_one_port)
         soft_disk_tomcat_one_list.insert(1, application_one_name)
         soft_disk_tomcat_one_list.insert(2, soft_disk_tomcat_one_size)
-        whether_return_one = 1
     else:
-        whether_return_one = 2
-        pass
+        soft_disk_tomcat_one_list.insert(0, '')
+        soft_disk_tomcat_one_list.insert(1, '')
+        soft_disk_tomcat_one_list.insert(2, '')
     # 2号数据处理流程
     soft_disk_tomcat_two_size = float(catil_Log_two[0:3].rstrip('\t').rstrip('G'))
     if soft_disk_tomcat_two_size >= Disk_alarm_value:
@@ -303,31 +454,38 @@ def zhumain_cd_du(cd_du):
         soft_disk_tomcat_two_list.insert(0, soft_disk_tomcat_two_port)
         soft_disk_tomcat_two_list.insert(1, application_two_name)
         soft_disk_tomcat_two_list.insert(2, soft_disk_tomcat_two_size)
-        whether_return_two = 1
     else:
-        whether_return_two = 2
-        pass
-    whether_return_state_list.insert(0, whether_return_one)
-    whether_return_state_list.insert(1, whether_return_two)
-    return soft_disk_tomcat_one_list, soft_disk_tomcat_two_list, whether_return_state_list
+        # 将获取的端口号，项目中文名，应用大小添加到list中。
+        soft_disk_tomcat_two_list.insert(0, '')
+        soft_disk_tomcat_two_list.insert(1, '')
+        soft_disk_tomcat_two_list.insert(2, '')
+    return soft_disk_tomcat_one_list, soft_disk_tomcat_two_list
 
 # 进入端口查询项目名称阶段
 def select_port_application(soft_disk_tomcat_port):
     # 进入端口查询项目名称阶段
     projectname = ''
     datalist = server_Data["applicationlist"]
-    for e in datalist:
-        # print soft_disk_tomcat_port
-        f = e['portId']
-        soft_disk_tomcat_port = int(soft_disk_tomcat_port)
-        if soft_disk_tomcat_port == f:
-            # print True
-            projectname = e['projectName']
-            break
-        else:
-            # print False
-            projectname = 'null'
-            pass
+    try:
+        for e in datalist:
+            # print soft_disk_tomcat_port
+            f = e['portId']
+            if soft_disk_tomcat_port == 'hnzc':
+                projectname = '河南政采'
+            elif soft_disk_tomcat_port == 'lete':
+                projectname = '国网删除'
+            else:
+                soft_disk_tomcat_port = int(soft_disk_tomcat_port)
+                if soft_disk_tomcat_port == f:
+                    # print True
+                    projectname = e['projectName']
+                    break
+                else:
+                    # print False
+                    projectname = 'null'
+                    pass
+    except ValueError:
+        projectname = 'null'
     return projectname
 
 # 数据是否符合要求
@@ -386,7 +544,7 @@ def inst_excel(server_data_list, server_List_num):
         alignment = xlwt.Alignment()
         alignment.horz = xlwt.Alignment.HORZ_CENTER
         alignment.vert = xlwt.Alignment.VERT_CENTER
-        # 单元格背景色  0x30 0x1E  0x28 [0x2C] 【0x34 0x16】
+        # 单元格背景色  0x30 0x1E  0x28 [0x2C] 【0x16】
         pattern_yellow = xlwt.Pattern()
         pattern_yellow.pattern = xlwt.Pattern.SOLID_PATTERN
         pattern_yellow.pattern_fore_colour = 0x16
@@ -466,13 +624,13 @@ def inst_excel(server_data_list, server_List_num):
                 excelx += 1
             if server_List_num == len(server_list):
                 new_time = time.strftime(ISOTIMEFORMAT_t, time.localtime())
-                file_te = r"C:\\Users\\Administrator\\Desktop\\" + new_time + "server.xls"
+                file_te = r"C:\\Users\\Administrator\\Desktop\\" + new_time + "server_checks.xls"
                 file_path = os.path.exists(file_te)
                 if file_path == True:
                     print u'原文件已存在,修改文件名称!'
                     num = 1
                     str_num = str(num + 1)
-                    file_te = r"C:\\Users\\Administrator\\Desktop\\" + new_time + r"server-" + str_num + r".xls"
+                    file_te = r"C:\\Users\\Administrator\\Desktop\\" + new_time + r"server_checks-" + str_num + r".xls"
                     num += 1
                     wbk.save(file_te)
                     print u'修改文件并录入成功！'
