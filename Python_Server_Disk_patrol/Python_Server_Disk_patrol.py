@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# author:YanYi
+# version:1.0
+#
 import paramiko
 import time
 import os
-import chardet
 import xlwt
-import json
-import xlrd
-from xlutils.copy import copy
 import sys
+import _winreg
 reload(sys)
 sys.setdefaultencoding('utf-8')
 # 变量定义
@@ -26,100 +26,7 @@ ISOTIMEFORMAT_t = '%m%d-'
 ISOTIMEFORMAT_m = '%H:%M'
 now_time = time.strftime(ISOTIMEFORMAT, time.localtime())
 return_state = 1
-# server_Data = {
-#     "Serverlist": [
-#         {
-#             "Serverip": "192.168.133.133",
-#             "Serveruser": "root",
-#             "Serverpwd": "12345678",
-#             "excel_num": 3,
-#             "Server_environment": "测试"
-#         },
-#         {
-#             "Serverip": "192.168.133.147",
-#             "Serveruser": "root",
-#             "Serverpwd": "171800",
-#             "excel_num": 5,
-#             "Server_environment": "生产"
-#         },
-#         {
-#             "Serverip": "192.168.133.134",
-#             "Serveruser": "root",
-#             "Serverpwd": "12345678",
-#             "excel_num": 4,
-#             "Server_environment": "测试"
-#         },
-#         {
-#             "Serverip": "192.168.133.135",
-#             "Serveruser": "root",
-#             "Serverpwd": "12345678",
-#             "excel_num": 6,
-#             "Server_environment": "生产"
-#         },
-#     ],
-#     "applicationlist": [
-#         {
-#             "portId": 8114,
-#             "projectName": "联通"
-#         },
-#         {
-#             "portId": 8099,
-#             "projectName": "宝安"
-#         },
-#         {
-#             "portId": 8081,
-#             "projectName": "SAP推送"
-#         },
-#         {
-#             "portId": 8092,
-#             "projectName": "VP下发"
-#         },
-#         {
-#             "portId": 8084,
-#             "projectName": "直送单下发"
-#         },
-#         {
-#             "portId": 8090,
-#             "projectName": "SAP回传"
-#         },
-#         {
-#             "portId": 8091,
-#             "projectName": "CPWEB"
-#         },
-#         {
-#             "portId": 8070,
-#             "projectName": "辉瑞"
-#         },
-#         {
-#             "portId": 8122,
-#             "projectName": "用友"
-#         },
-#         {
-#             "portId": 8115,
-#             "projectName": "红星美凯龙"
-#         },
-#         {
-#             "portId": 8080,
-#             "projectName": "铁塔"
-#         },
-#         {
-#             "portId": 8020,
-#             "projectName": "阿里巴巴"
-#         },
-#         {
-#             "portId": 8041,
-#             "projectName": "河南政采"
-#         },
-#         {
-#             "portId": 8095,
-#             "projectName": "华为"
-#         },
-#         {
-#             "portId": 8045,
-#             "projectName": "工商银行"
-#         }
-#     ]
-# }
+
 server_Data = {
     "Serverlist": [
         {
@@ -264,7 +171,7 @@ server_Data = {
 server_list = server_Data['Serverlist']
 
 def heng():
-    print "-" * 100
+    print "-" * 60
 # 判断服务器是否正常
 def pingServer(server):
     result = os.system('ping ' + server)
@@ -274,16 +181,6 @@ def pingServer(server):
     else:
         print u'服务器 ping ok'
         return 1
-    # print df_h, cd_du
-    # print catil_tomcat_num, catil_tomcat_name, catil_Log_num, catil_Log_name
-    # print soft_disk_tomcat_size, soft_disk_tomcat_name, soft_disk_tomcat_name_port
-    # login_status = 1
-    # if login_status == 1:
-    #     time.sleep(1)
-    #     print u'连接正常！'
-    # else:
-    #     time.sleep(1)
-    #     print u'登录失败，请查找原因。'
 
 def main():
     start = time.clock()
@@ -291,93 +188,42 @@ def main():
     print u'服务器巡查程序启动'
     server_List_num = 0
     server_data_list = []
-    time.sleep(0.5)
     heng()
     time.sleep(0.2)
     print u'当前时间：', time.strftime('%Y-%m-%d %H:%M:%S')
     time.sleep(0.3)
     for server_List in server_list:
-        # Serverip = server_List['Serverip']
         serverOneIp = server_List['Serverip']
         serverOneuser = server_List['Serveruser']
         serverOnepwd = server_List['Serverpwd']
         # 返回未处理list数据
-        try:
-            df_h, cd_du = command_returns(serverOneIp, serverOneuser, serverOnepwd)
-            # if a == 0:
-            #     df_h = [
-            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-            #         u'/dev/mapper/centos_yanyi-root   46G   10G   34G   20% /\n',
-            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            #     cd_du = [u'4.5G\tapache-tomcat-8084\n', u'3G\tapache-tomcat-8028\n', u'5.2G\tapache-tomcat-8092\n',
-            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            #     a += 1
-            # elif a == 1:
-            #     df_h = [
-            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-            #         u'/dev/mapper/centos_yanyi-root   46G   23G   23G   50% /\n',
-            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            #     cd_du = [u'5.5G\tapache-tomcat-8055\n', u'5.4G\tapache-tomcat-8114\n', u'5.2G\tapache-tomcat-8091\n',
-            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            #     a += 1
-            # elif a == 2:
-            #     df_h = [
-            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-            #         u'/dev/mapper/centos_yanyi-root   46G   34G   13G   80% /\n',
-            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            #     cd_du = [u'10G\tapache-tomcat-8182\n', u'7.4G\tapache-tomcat-8092\n', u'5.2G\tapache-tomcat-8091\n',
-            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            #     a += 1
-            # elif a == 3:
-            #     df_h = [
-            #         u'\u6587\u4ef6\u7cfb\u7edf                       \u5bb9\u91cf  \u5df2\u7528  \u53ef\u7528 \u5df2\u7528% \u6302\u8f7d\u70b9\n',
-            #         u'/dev/mapper/centos_yanyi-root   46G   34G   5G   95% /\n',
-            #         u'devtmpfs                       2.0G     0  2.0G    0% /dev\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /dev/shm\n',
-            #         u'tmpfs                          2.0G  8.7M  2.0G    1% /run\n',
-            #         u'tmpfs                          2.0G     0  2.0G    0% /sys/fs/cgroup\n',
-            #         u'/dev/sda1                      497M  137M  361M   28% /boot\n',
-            #         u'tmpfs                          394M     0  394M    0% /run/user/0\n',
-            #         u'/dev/sdb1                      9.8G   23M  9.2G    1% /softwarelog\n']
-            #     cd_du = [u'15G\tapache-tomcat-8090\n', u'9G\tapache-tomcat-8080\n', u'5.2G\tapache-tomcat-8091\n',
-            #              u'4.3G\tapache-tomcat-8028\n', u'3.3G\tapache-tomcat-8122\n', u'2.2G\tapache-tomcat-8099\n']
-            #     a += 1
-
-            # 返回已处理list数据
-            time.sleep(1)
-            catil_tomcat_list, catil_Log_list = zhumain_df_h(df_h)
-            soft_disk_tomcat_one_list, soft_disk_tomcat_two_list = zhumain_cd_du(cd_du)
-            server_List_num += 1
-            server_list_data = data_excel(catil_tomcat_list, soft_disk_tomcat_one_list, soft_disk_tomcat_two_list, serverOneIp)
-            if server_list_data is None:
-                pass
-            else:
-                server_data_list.append(server_list_data)
-        except BaseException:
-            print u'巡查服务器：%s 异常！'% (serverOneIp)
+        # try:
+        df_h, cd_du = command_returns(serverOneIp, serverOneuser, serverOnepwd)
+        output = u'巡查服务器编号：%s ' % (serverOneIp)
+        print output,
+        time.sleep(0.5)
+        print u'登录正常',
+        time.sleep(1)
+        catil_tomcat_list, catil_Log_list = zhumain_df_h(df_h)
+        soft_disk_tomcat_one_list, soft_disk_tomcat_two_list = zhumain_cd_du(cd_du)
+        server_List_num += 1
+        server_list_data = data_excel(catil_tomcat_list, soft_disk_tomcat_one_list, soft_disk_tomcat_two_list, serverOneIp)
+        if server_list_data is None:
             pass
+        else:
+            server_data_list.append(server_list_data)
+        print u'...',
+        time.sleep(0.5)
+        print u'巡查完毕'
+        # except :
+        #     print u'巡查异常'
+        #     pass
+
+
     time.sleep(1)
     file_te = inst_excel(server_data_list, server_List_num)
     time.sleep(1)
-    print '文件保存地址：', file_te
+    print u'文件保存地址：', file_te
     print ''
     end = time.clock()
     time.sleep(1)
@@ -387,14 +233,14 @@ def main():
     time.sleep(0.2)
     print u'脚本运行时间：%s s' % (end - start)
     print u'完成时间：', now_time
+    os.system(u"pause")
 # 命令结果返回函数
 def command_returns(serverOneIp, serverOneuser, serverOnepwd):
         ps = paramiko.SSHClient()
         ps.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ps.connect(hostname=serverOneIp, port=22, username=serverOneuser, password=serverOnepwd)
         commlistDf = ['df -h']
-        time.sleep(2)
-        print u'巡查服务器编号：%s 登录正常'% (serverOneIp)
+        time.sleep(1)
         for comm in commlistDf:
             stdin, stdout, stderr = ps.exec_command(comm)
             df_h = stdout.readlines()
@@ -409,19 +255,17 @@ def command_returns(serverOneIp, serverOneuser, serverOnepwd):
 def zhumain_df_h(df_h):
         # 处理原始数据为使用数据
         catil_tomcat = ''.join(df_h[1]).strip().lstrip().rstrip()
-        catil_Log = '' #.join(df_h[4]).strip().lstrip().rstrip()
         # 截取根目录
-        catil_tomcat_num = catil_tomcat.rsplit('G', 1)[-1].strip().lstrip().replace(' ', '').rstrip('% /')
-        catil_tomcat_name = catil_tomcat.rsplit('%', 1)[-1].strip().lstrip().rstrip()
+        server_num_name = catil_tomcat[35:-1]
+        catil_tomcat_num = catil_tomcat.rsplit(' ', 6)[5]
+        catil_tomcat_name = catil_tomcat.rsplit(' ', 6)[6].strip().lstrip().rstrip()
         # 将处理的数据添加到list中
         catil_tomcat_list.insert(0, catil_tomcat_num)
         catil_tomcat_list.insert(1, catil_tomcat_name)
         # 截取的log目录
         catil_Log_num = catil_tomcat.rsplit('G', 1)[-1].strip().lstrip().rstrip('/')
-        catil_Log_name = catil_Log.rsplit('%', 1)[-1].strip().lstrip()
         # 将处理的数据添加到list中
         catil_Log_list.insert(0, catil_Log_num)
-        catil_Log_list.insert(1, catil_Log_name)
         return catil_tomcat_list, catil_Log_list
 
 # cd_du数据处理流
@@ -491,7 +335,7 @@ def select_port_application(soft_disk_tomcat_port):
 # 数据是否符合要求
 def data_excel(catil_tomcat_list, soft_disk_tomcat_one_list, soft_disk_tomcat_two_list, serverOneIp):
     server_list_data = [ ]
-    catil_tomcat_size = int(catil_tomcat_list[0])
+    catil_tomcat_size = int(catil_tomcat_list[0].rsplit('%')[0])
     # 如果应用目录使用百分比大于70进行数据写入excel
     if catil_tomcat_size >= 50:
         server_list_data.insert(0, serverOneIp)
@@ -510,7 +354,6 @@ def data_excel(catil_tomcat_list, soft_disk_tomcat_one_list, soft_disk_tomcat_tw
         server_list_data.insert(8, soft_disk_tomcat_two_list[0])
         server_list_data.insert(9, soft_disk_tomcat_two_list[1])
         server_list_data.insert(10, soft_disk_tomcat_two_list[2])
-        print '巡查服务器编号：'+ serverOneIp + u' 符合录入要求'
         return server_list_data
     else:
         server_list_data.insert(0, serverOneIp)
@@ -529,7 +372,6 @@ def data_excel(catil_tomcat_list, soft_disk_tomcat_one_list, soft_disk_tomcat_tw
         server_list_data.insert(8, '')
         server_list_data.insert(9, '')
         server_list_data.insert(10, '')
-        print '巡查服务器编号：' + serverOneIp + u' 不符合录入要求'
         return server_list_data
 
 # 写入excel文件
@@ -611,7 +453,7 @@ def inst_excel(server_data_list, server_List_num):
             time.sleep(3)
             excelx = 2
             list_num_2 = 0
-            for a in range(len(server_list)): # 4
+            for a in range(len(server_list)):
                 for_num = 11
                 excely = 0
                 list_num = 0
@@ -624,13 +466,14 @@ def inst_excel(server_data_list, server_List_num):
                 excelx += 1
             if server_List_num == len(server_list):
                 new_time = time.strftime(ISOTIMEFORMAT_t, time.localtime())
-                file_te = r"C:\\Users\\Administrator\\Desktop\\" + new_time + "server_checks.xls"
+                Desktop = get_desktop()
+                file_te = Desktop + r"\T-" + new_time + r"server_checks.xls"
                 file_path = os.path.exists(file_te)
                 if file_path == True:
                     print u'原文件已存在,修改文件名称!'
                     num = 1
                     str_num = str(num + 1)
-                    file_te = r"C:\\Users\\Administrator\\Desktop\\" + new_time + r"server_checks-" + str_num + r".xls"
+                    file_te = Desktop + r"\T-" + new_time + r"server_checks-" + str_num + r".xls"
                     num += 1
                     wbk.save(file_te)
                     print u'修改文件并录入成功！'
@@ -641,4 +484,10 @@ def inst_excel(server_data_list, server_List_num):
                     return file_te
         except UnboundLocalError:
             print u'局部变量的引用赋值前<文件>'
+# 获取当前桌面路径
+def get_desktop():
+    key = _winreg.OpenKey(_winreg.HKEY_CURRENT_USER,\
+                          r'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders',)
+    return _winreg.QueryValueEx(key, "Desktop")[0]
+
 main()
